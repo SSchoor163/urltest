@@ -19,11 +19,14 @@ namespace testurl3
 
         public void Initialize()
         {
-            AddCompanies();
-            AddGtMetric();
+           
+            var Metric = MakeGtMetric();
+            
+            AddMetric(Metric.Result);
+
         }
 
-        public void AddCompanies()
+        public void AddCompanies( GtMetrics metric)
         {
             if (_CompanyRepo.GetAll().Count() > 0) return;
             Company initial = new Company
@@ -36,7 +39,8 @@ namespace testurl3
                 Contacted = false,
                 Country = "United States",
                 EndEnterpriseSupport = null,
-                GtMetricsId = null,
+                GtMetricsId = 1,
+                GtMetrics = metric,
                 Notes = string.Empty,
                 PreviousVersion = null,
                 RankingScale = 1,
@@ -50,11 +54,19 @@ namespace testurl3
             _CompanyRepo.Add(initial);
         }
 
-        public void AddGtMetric()
+        public async Task<GtMetrics>  MakeGtMetric()
         {
-            if (_gtMetricsServices.GetAll().Count() > 0) return;
-            GtMetrics initial = new GtMetrics();
-            _gtMetricsServices.PostTest("kubotausa.com", 1);
+            if (_gtMetricsServices.GetAll().Count() > 0) return null;
+            
+             GtMetrics initial = await _gtMetricsServices.Test("kubotausa.com", 1);
+            return initial;
+            
+        }
+        public void AddMetric(GtMetrics metric)
+        {
+            var exists = _gtMetricsServices.Get(1);
+            if (exists == null)
+                AddCompanies(metric);
         }
     }
 }

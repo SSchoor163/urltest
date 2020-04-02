@@ -6,10 +6,10 @@ namespace testurl3.Services
 {
     public interface IGtMetricsServices
     {
+        GtMetrics Add(GtMetrics gtMetric);
         GtMetrics Get(int id);
         IEnumerable<GtMetrics> GetAll();
         void Remove(int id);
-        GtMetrics Update(GtMetrics gtMetric);
-        Task<GtMetrics> PostTest(string url, int companyId);
+        Task<GtMetrics> Test(string url, int companyId);
     }
 }

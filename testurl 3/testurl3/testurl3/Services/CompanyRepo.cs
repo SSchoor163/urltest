@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace testurl3.Services
         }
         public Company Get(int companyId)
         {
-            var comapny = _dbContext.Companies.FirstOrDefault(c => c.Id == companyId);
+            var comapny = _dbContext.Companies.Include(m=>m.GtMetrics).FirstOrDefault(c => c.Id == companyId);
             if (comapny == null) return null;
             return comapny;
         }
@@ -47,7 +48,12 @@ namespace testurl3.Services
         public void Remove(int companyId)
         {
             var ExistingCompany = _dbContext.Companies.FirstOrDefault(c => c.Id == companyId);
+           
             if (ExistingCompany == null) throw new SystemException("The Company you are trying to delete was not found.");
+
+            var ExistingMetric = _dbContext.GtMetrics.FirstOrDefault(m => m.CompanyId == companyId);
+            if (ExistingMetric != null)
+                _dbContext.GtMetrics.Remove(ExistingMetric);
             _dbContext.Companies.Remove(ExistingCompany);
             _dbContext.SaveChanges();
         }

@@ -24,7 +24,7 @@ namespace testurl3.Models
         public string City { get; set; }
         public string Street { get; set; }
         public string ZipCode { get; set; }
-        public int? GtMetricsId { get; set; }
-        public GtMetrics GtMetric { get; set; }
+        public int GtMetricsId { get; set; }
+        public GtMetrics GtMetrics { get; set; }
     }
 }

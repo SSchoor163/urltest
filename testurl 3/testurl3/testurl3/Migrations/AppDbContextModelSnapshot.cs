@@ -35,9 +35,9 @@ namespace testurl3.Migrations
 
                     b.Property<DateTime?>("EndEnterpriseSupport");
 
-                    b.Property<int?>("GtMetricId");
+                    b.Property<int>("GtMetricsId");
 
-                    b.Property<int?>("GtMetricsId");
+                    b.Property<int?>("GtMetricsId1");
 
                     b.Property<string>("Notes");
 
@@ -59,7 +59,7 @@ namespace testurl3.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GtMetricId");
+                    b.HasIndex("GtMetricsId1");
 
                     b.ToTable("Companies");
                 });
@@ -136,9 +136,9 @@ namespace testurl3.Migrations
 
             modelBuilder.Entity("testurl3.Models.Company", b =>
                 {
-                    b.HasOne("testurl3.Models.GtMetrics", "GtMetric")
+                    b.HasOne("testurl3.Models.GtMetrics", "GtMetrics")
                         .WithMany()
-                        .HasForeignKey("GtMetricId");
+                        .HasForeignKey("GtMetricsId1");
                 });
 #pragma warning restore 612, 618
         }

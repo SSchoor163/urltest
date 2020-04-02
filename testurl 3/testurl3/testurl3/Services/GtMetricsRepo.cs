@@ -22,8 +22,10 @@ namespace testurl3.Services
         }
         public GtMetrics Update(GtMetrics newMetric)
         {
+            
             var ExistingMetric = _dbContext.GtMetrics
                 .FirstOrDefault(M => M.CompanyId == newMetric.CompanyId);
+            newMetric.Id = ExistingMetric.Id;
             if (ExistingMetric == null) return null;
             _dbContext.Entry(ExistingMetric).CurrentValues
                 .SetValues(newMetric);
@@ -34,10 +36,15 @@ namespace testurl3.Services
         }
         public GtMetrics Get(int companyId)
         {
-            
-            GtMetrics Metric = _dbContext.GtMetrics.FirstOrDefault(m => m.CompanyId == companyId);
-            if (Metric == null) return null;
-            return Metric;
+            try
+            {
+                GtMetrics Metric = _dbContext.GtMetrics.FirstOrDefault(m => m.CompanyId == companyId);
+                if (Metric == null) return null;
+                return Metric;
+            }catch(Exception ex)
+            {
+                return null;
+            }
         }
         public IEnumerable<GtMetrics> GetAll()
         {

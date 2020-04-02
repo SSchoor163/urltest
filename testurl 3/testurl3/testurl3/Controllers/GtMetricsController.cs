@@ -55,19 +55,21 @@ namespace testurl3.Controllers
         }
 
         // POST: api/GtMetrics/5
-        [HttpPost("{id}")]
-        public async Task<IActionResult> Post([FromBody] string url, int companyId)
+        [HttpPost]
+        public async Task<IActionResult> Post(GtMetricsToApi metric)
         {
             try
             {
                 GtMetrics results = await Task.Run(() =>
                 {
-                    return _gtService.PostTest(url, companyId);
+                    return _gtService.Test(metric.Url, metric.CompanyId);
 
                 });
-                if (results != null)
-                    return Ok(results.Id);
-                return NotFound(results.Error);
+                if(results==null)
+                    return NotFound(results.Error);
+                var AddMetric = _gtService.Add(results);
+                return Ok(results.Id);
+                
             }
             catch (Exception ex)
             {
@@ -79,16 +81,22 @@ namespace testurl3.Controllers
 
         }
 
-        // PUT: api/GtMetrics/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
+     // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                var metric = _gtService.Get(id);
+                if (metric == null) return NotFound();
+                _gtService.Remove(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("RemoveGtMetric", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
     }
 }

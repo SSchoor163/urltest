@@ -46,8 +46,8 @@ namespace testurl3
             services.AddScoped<DbInitializer>();
             services.AddScoped<ICompanyRepo, CompanyRepo>();
             services.AddScoped<ICompanyServices, CompanyServices>();
-            services.AddScoped<IGtMetricsRepo, GtMetricsRepo>();
-            services.AddScoped<IGtMetricsServices, GtMetricsServices>();
+            services.AddTransient<IGtMetricsRepo, GtMetricsRepo>();
+            services.AddTransient<IGtMetricsServices, GtMetricsServices>();
             
         }
 
