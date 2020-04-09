@@ -93,6 +93,7 @@ namespace testurl3.Services
             GtMetrics FinalResult = new GtMetrics()
             {
                 Error = response.Data.error,
+                Status = response.Data.state,
                 ReportUrl = response.Data.results.report_url,
                 PageSpeedScore = response.Data.results.pagespeed_score,
                 YSlowScore = response.Data.results.yslow_score,
@@ -144,24 +145,15 @@ namespace testurl3.Services
             {
                 throw new Exception("Error getting company targeted by new metric. Are you sure the comapny Id you posted exists?");
             }
-            int CompanyGtMetricId = company.GtMetricsId;
-            GtMetrics metric;
-            if (CompanyGtMetricId == 0)
-            {
-                metric = _gtMetricsRepo.Add(gtMetric);
-                if (metric == null) throw new Exception("Error new adding metric");
-            }
-            else
-            {
-                metric = _gtMetricsRepo.Update(gtMetric);
-                if (metric == null) throw new Exception("Error new updating exiting metric");
-            }
+            
+                company.GtMetrics = gtMetric;
+               Company updateCompany =  _companyServices.Update(company);
+                //metric = _gtMetricsRepo.Add(gtMetric);
+                if (updateCompany == null) throw new Exception("Error new adding metric");
+         
 
-            
-            
-            
-            
-            return metric;
+
+            return gtMetric;
         }
         public void Remove(int id)
         {

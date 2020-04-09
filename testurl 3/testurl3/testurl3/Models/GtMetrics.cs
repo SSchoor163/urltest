@@ -8,6 +8,7 @@ namespace testurl3.Models
     public class GtMetrics
     {
         public int Id { get; set; }
+        public string Status { get; set; }
         public string Error { get; set; }
         public string ReportUrl { get; set; }
         public int? PageSpeedScore { get; set; }

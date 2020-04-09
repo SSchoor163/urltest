@@ -1,0 +1,34 @@
+export interface GtMetrics {
+    id:number;
+    status:string;
+    error:string;
+    reportUrl:string;
+    pageSpeedScore:number;
+    ySlowScore:number;
+    htmlBytes:number;
+    htmlLoadTime:number;
+    pageBytes:number;
+    pageLoadTime:number;
+    pageElements:number;
+    redirectDuration:number;
+    connectionDuration:number;
+    backendDuration:number;
+    firstPaintTime:number;
+    firstContentfulPaintTime:number;
+    domInteractiveTime:number;
+    domContentLoadedTime:number;
+    domContentLoadedDuration:number;
+    onloadTime:number;
+    fullyLoadedTime:number;
+    rumSpeedIndex:number;
+    screenshot:string;
+    hARFile:string;
+    pageSpeed:string;
+    pageSpeedFiles:string;
+    ySlow:string;
+    reportPdf:string;
+    reportPdfFull:string;
+    video:string;
+    filmStrip:string;
+    companyId:number;
+}

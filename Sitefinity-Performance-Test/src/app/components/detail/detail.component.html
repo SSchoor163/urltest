@@ -1,0 +1,68 @@
+<div class="container"> 
+<h1 class="text-center pt-5">Detail Report</h1>
+<mat-card class="center mb-5 ml-3"> 
+    <mat-card-title class="text-center">{{company.companyName}}</mat-card-title>
+        <mat-card-content>
+            <p><strong>Business Type</strong>: {{company.businessType}}</p>
+            <p class="address"><strong>Address</strong>: </p><div class="address">{{company.street}}<br> {{company.city}}, {{company.state_Region}} {{company.zipCode}}</div>
+            <p class="mt-2"><strong>Contacted</strong>: <span *ngIf="company.contacted">Yes</span><span *ngIf="!company.contacted">No</span></p>
+            <p><strong>Ranking Scale</strong>: {{company.rankingScale}}</p>
+            <p><strong>Notes</strong>: {{company.notes}}</p>
+        </mat-card-content>
+    </mat-card>
+
+<mat-card class="center mb-5 ml-3"> 
+    <mat-card-title class="text-center">Sitefinity Information</mat-card-title>
+    <mat-card-content>
+        <p><strong>URL</strong>: {{company.url}}</p>
+        <p><strong>Sitefinity Version</strong>: {{company.sfVersion}}</p>
+        <p><strong>Date of Confirmatopm of Sitefinity Version</strong>: {{company.confirmedVersionDate | date}}</p>
+        <p><strong>End of Enterprise Support</strong>: {{company.endEnterpriseSupport | date}}</p>
+        <p><strong>Sitefinity Retirment Date</strong>: {{company.sitefinityRetirmentDate | date}}</p>
+        <p><strong>Previous Sitefinity Version</strong>: {{company.previousVersion}}</p>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="center mb-5 ml-3"> 
+    <mat-card-title class="text-center">GtMetrics Performance Test</mat-card-title>
+    <mat-card-content>
+    <p ><strong>Status</strong>: <span *ngIf="company.gtMetrics==null">GtMetrics has not peroformed a test of this site.</span> 
+                <span *ngIf="company.gtMetrics != null">{{company.gtMetrics.status}}</span></p>
+    <div *ngIf="company.gtMetrics != null">
+        <p *ngIf="company.gtMetrics.error"><strong>Error</strong>: {{company.gtMetrics.error}}</p>
+        <p><strong placement="top" ngbTooltip="Link is only good for 30 days after the report is generated">GtMetrics Report</strong>: <a href="{{company.gtMetrics.reportUrl}}">{{company.gtMetrics.reportUrl}}</a></p>
+        <p *ngIf="company.gtMetrics.reportPdf != null"><strong placement="top" ngbTooltip="Link is only good for 30 days after the report is generated"> Partial Report Pdf</strong>: <a href="{{company.gtMetrics.reportPdf}}">{{company.gtMetrics.reportPdf}}</a></p>
+        <p *ngIf="company.gtMetrics.reportPdfFull != null"><strong placement="top" ngbTooltip="Link is only good for 30 days after the report is generated">Full Report Pdf</strong>: <a href="{{company.gtMetrics.reportPdfFull}}">{{company.gtMetrics.reportPdfFull}}</a></p>
+        <p *ngIf="company.gtMetrics.pageSpeedScore != null"><strong>Page Speed Score</strong>: {{company.gtMetrics.pageSpeedScore}}/100</p>
+        <p *ngIf="company.gtMetrics.ySlowScore != null"><strong>YSlow Score</strong>: {{company.gtMetrics.ySlowScore}}/100</p>
+        <p *ngIf="company.gtMetrics.pageElements != null"><strong>Number of Elements on Page</strong>: {{company.gtMetrics.pageElements}}</p>
+        <p *ngIf="company.gtMetrics.htmlLoadTime != null"><strong>HTML Load Time</strong>: {{company.gtMetrics.htmlLoadTime/1000}}s</p>
+        <p *ngIf="company.gtMetrics.htmlBytes != null"><strong>HTML Bytes</strong>: {{htmlBytes}}</p>
+        <p *ngIf="company.gtMetrics.pageBytes != null"><strong>Page Bytes</strong>: {{pageBytes}}</p>
+        <p *ngIf="company.gtMetrics.pageLoadTime != null"><strong>Page Load Time</strong>: {{pageLoadTime}}</p>
+        
+        <p *ngIf="company.gtMetrics.redirectDuration != null"><strong>Redirect Duration</strong>: {{company.gtMetrics.redirectDuration/1000}}s</p>
+        <p *ngIf="company.gtMetrics.connectionDuration != null"><strong>Connection Duration</strong>: {{company.gtMetrics.connectionDuration/1000}}s</p>
+        <p *ngIf="company.gtMetrics.backendDuration != null"><strong>Backend Duration</strong>: {{company.gtMetrics.backendDuration/1000}}s</p>
+        <p *ngIf="company.gtMetrics.firstPaintTime != null"><strong>First Paint Time</strong>: {{company.gtMetrics.firstPaintTime/1000}}s</p>
+        <p *ngIf="company.gtMetrics.firstContentfulPaintTime != null"><strong>First Contentful Paint Time</strong>: {{company.gtMetrics.firstContentfulPaintTime/1000}}s</p>
+        <p *ngIf="company.gtMetrics.domInteractiveTime != null"><strong>Dom Interactive Time</strong>: {{company.gtMetrics.domInteractiveTime/1000}}s</p>
+        <p *ngIf="company.gtMetrics.domContentLoadedTime != null"><strong>Dom Content Loaded Time</strong>: {{company.gtMetrics.domContentLoadedTime/1000}}s</p>
+        <p *ngIf="company.gtMetrics.domContentLoadedDuration != null"><strong>Dom Content Loaded Duration</strong>: {{company.gtMetrics.domContentLoadedDuration/1000}}s</p>
+        <p *ngIf="company.gtMetrics.onloadTime != null"><strong>On Load Time</strong>: {{company.gtMetrics.onloadTime/1000}}s</p>
+        <p *ngIf="company.gtMetrics.fullyLoadedTime != null"><strong>Fully Loaded Time</strong>: {{company.gtMetrics.fullyLoadedTime/1000}}s</p>
+        <p *ngIf="company.gtMetrics.rumSpeedIndex != null"><strong>Rum Speed Index</strong>: {{company.gtMetrics.rumSpeedIndex}}</p>
+        
+        <p *ngIf="company.gtMetrics.hARFile != null"><strong>HAR File</strong>: {{company.gtMetrics.hARFile}}</p>
+        <p *ngIf="company.gtMetrics.pageSpeed != null"><strong>Dowload PageSpeed Beacon</strong>: <a target="_blank" href="{{company.gtMetrics.pageSpeed}}">{{company.gtMetrics.pageSpeed}}</a></p>
+        <p *ngIf="company.gtMetrics.pageSpeedFiles != null" ><strong placement="top" ngbTooltip="files are combined into a single tar file">PageSpeed Files</strong>: <a href="{{company.gtMetrics.pageSpeedFiles}}">{{company.gtMetrics.pageSpeedFiles}}</a></p>
+        <p *ngIf="company.gtMetrics.ySlow != null"><strong>Download YSlow Beacon</strong>: <a target="_blank" href="{{company.gtMetrics.ySlow}}">{{company.gtMetrics.ySlow}}</a></p>
+        
+        <p *ngIf="company.gtMetrics.screenshot != null"><strong>Screenshot</strong>: <img src="{{company.gtMetrics.screenshot}}" /></p>
+        <p *ngIf="company.gtMetrics.video != null"><strong>Video</strong>: <a target="_blank" href="{{company.gtMetrics.video}}">{{company.gtMetrics.video}}</a></p>
+        <p *ngIf="company.gtMetrics.filmStrip != null"><strong>Film Strip</strong>: <a target="_blank" href="{{company.gtMetrics.filmStrip}}">{{company.gtMetrics.filmStrip}}</a></p>
+        </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+

@@ -26,6 +26,7 @@ namespace testurl3.Services
             var ExistingCompany = _dbContext.Companies
                 .FirstOrDefault(c => c.Id == newCompany.Id);
             if (ExistingCompany == null) return null;
+            newCompany.Id = ExistingCompany.Id;
             _dbContext.Entry(ExistingCompany).CurrentValues
                 .SetValues(newCompany);
             _dbContext.Update(ExistingCompany);
@@ -41,7 +42,7 @@ namespace testurl3.Services
         }
         public IEnumerable<Company> GetAll()
         {
-            var company = _dbContext.Companies;
+            var company = _dbContext.Companies.Include(m=>m.GtMetrics);
             if (company == null) return null;
             return company;
         }

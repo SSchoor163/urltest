@@ -9,7 +9,7 @@ using testurl3;
 namespace testurl3.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200402140910_InitialCreate")]
+    [Migration("20200407165453_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,9 +37,7 @@ namespace testurl3.Migrations
 
                     b.Property<DateTime?>("EndEnterpriseSupport");
 
-                    b.Property<int>("GtMetricsId");
-
-                    b.Property<int?>("GtMetricsId1");
+                    b.Property<int?>("GtMetricsId");
 
                     b.Property<string>("Notes");
 
@@ -61,7 +59,7 @@ namespace testurl3.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GtMetricsId1");
+                    b.HasIndex("GtMetricsId");
 
                     b.ToTable("Companies");
                 });
@@ -125,6 +123,8 @@ namespace testurl3.Migrations
 
                     b.Property<string>("Screenshot");
 
+                    b.Property<string>("Status");
+
                     b.Property<string>("Video");
 
                     b.Property<string>("YSlow");
@@ -140,7 +140,7 @@ namespace testurl3.Migrations
                 {
                     b.HasOne("testurl3.Models.GtMetrics", "GtMetrics")
                         .WithMany()
-                        .HasForeignKey("GtMetricsId1");
+                        .HasForeignKey("GtMetricsId");
                 });
 #pragma warning restore 612, 618
         }

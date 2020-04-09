@@ -1,0 +1,105 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update Company Information</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form action="">
+            <div class="form-group">
+
+                <label for="companyName">Company Name</label>
+                <div class="input-group">
+                    <input type="text" class="todo-input" name="companyName" id="companyName" placeholder="{{this.company.companyName}}"  [(ngModel)]="companyName" >
+                </div>
+
+                <label for="businessType">Business Type</label>
+                <div class="input-group">
+                    <input type="text" class="todo-input" name="businessType" id="businessType" placeholder="{{this.company.businessType}}"  [(ngModel)]="businessType" >
+                </div>
+
+                <label for="street">street</label>
+                <div class="input-group">
+                    <input type="text" class="todo-input" name="street" id="street" placeholder="{{this.company.street}}"  [(ngModel)]="street" >
+                </div>
+
+                <label for="city">City</label>
+                <div class="input-group">
+                    <input type="text" class="todo-input" name="city" id="city" placeholder="{{this.company.city}}"  [(ngModel)]="city" >
+                </div>
+
+                <label for="state_Region">State/Region</label>
+                <div class="input-group">
+                    <input type="text" class="todo-input" name="state_Region" id="state_Region" placeholder="{{this.company.state_Region}}"  [(ngModel)]="state_Region" >
+                </div>
+
+                <label for="country">Country</label>
+                <div class="input-group">
+                    <input type="text" class="todo-input" name="country" id="country" placeholder="{{this.company.country}}"  [(ngModel)]="country" >
+                </div>
+
+                <label for="zipCode">Zip Code</label>
+                <div class="input-group">
+                    <input type="text" class="todo-input" name="zipCode" id="zipCode" placeholder="{{this.company.zipCode}}"  [(ngModel)]="zipCode" >
+                </div>
+
+                <p>Contacted: &nbsp;</p>
+                <div class="control"> 
+                
+                <div class="input-group" style="display: inline-block; width: fit-content;">
+                    <label for="contacted" >
+                        <input name="contacted" class="todo-input" type="radio" name="contacted"  [(ngModel)]="contacted" [value]="true" checked>True</label>
+                        <label for="contacted">
+                        <input name="contacted" class="todo-input" type="radio" name="contacted"  [(ngModel)]="contacted" [value]="false" >False</label>
+                </div>
+                </div>
+                <label for="rankingScale">Ranking Scale</label>
+                <div class="input-group">
+                    <input type="number" class="todo-input" name="rankingScale" id="rankingScale" placeholder="{{this.company.rankingScale}}"  [(ngModel)]="rankingScale" >
+                </div>
+
+                <label for="notes">Notes</label>
+                <div class="input-group">
+                    <input type="text" class="todo-input" name="notes" id="notes" placeholder="{{this.company.notes}}"  [(ngModel)]="notes" >
+                </div>
+
+                <label for="url">Company Url</label>
+                <div class="input-group">
+                    <input type="url" class="todo-input" name="url" id="url" placeholder="{{this.company.url}}"  [(ngModel)]="url" >
+                </div>
+                
+                <label for="sfVersion">Sitefinity Version</label>
+                <div class="input-group">
+                    <input type="number" class="todo-input" name="sfVersion" id="sfVersion" placeholder="{{this.company.sfVersion}}"  [(ngModel)]="sfVersion" >
+                </div>
+
+                <label for="confirmedVersionDate">Confirmed Sitefinity Version Date</label>
+                <div class="input-group">
+                    <input type="date" class="todo-input" name="confirmedVersionDate" id="confirmedVersionDate"  [ngModel]="confirmedVersionDate| date:'yyyy-MM-dd'"  (ngModelChange)="confirmedVersionDate = $event" >
+                </div>
+
+                <label for="endEnterpriseSupport">End of Enterprise Support</label>
+                <div class="input-group">
+                    <input type="date" class="todo-input" name="endEnterpriseSupport" id="endEnterpriseSupport" [ngModel]="endEnterpriseSupport| date:'yyyy-MM-dd'"  (ngModelChange)="endEnterpriseSupport = $event" >
+                </div>
+
+                <label for="sitefinityRetirmentDate">Sitefinity Retirment Date</label>
+                <div class="input-group">
+                    <input type="date" class="todo-input" name="sitefinityRetirmentDate" id="sitefinityRetirmentDate" [ngModel]="sitefinityRetirmentDate| date:'yyyy-MM-dd'"  (ngModelChange)="sitefinityRetirmentDate = $event" >
+                </div>
+
+                <label for="previousVersion">Previous Sitefinity Version</label>
+                <div class="input-group">
+                    <input type="number" class="todo-input" name="previousVersion" id="previousVersion" placeholder="{{this.company.previousVersion}}"  [(ngModel)]="previousVersion" >
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="editCompany()">Save</button>
+        <button type="button" class="btn btn-danger btn-sm" (click)="modal.dismiss()">Cancel</button>
+    </div>
+</ng-template>
+
+<div (click)="open(content)"><img src="../../../assets/edit.png" alt=""></div>

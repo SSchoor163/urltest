@@ -13,6 +13,7 @@ namespace testurl3.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Status = table.Column<string>(nullable: true),
                     Error = table.Column<string>(nullable: true),
                     ReportUrl = table.Column<string>(nullable: true),
                     PageSpeedScore = table.Column<int>(nullable: true),
@@ -71,24 +72,23 @@ namespace testurl3.Migrations
                     City = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
                     ZipCode = table.Column<string>(nullable: true),
-                    GtMetricsId = table.Column<int>(nullable: false),
-                    GtMetricsId1 = table.Column<int>(nullable: true)
+                    GtMetricsId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Companies_GtMetrics_GtMetricsId1",
-                        column: x => x.GtMetricsId1,
+                        name: "FK_Companies_GtMetrics_GtMetricsId",
+                        column: x => x.GtMetricsId,
                         principalTable: "GtMetrics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Companies_GtMetricsId1",
+                name: "IX_Companies_GtMetricsId",
                 table: "Companies",
-                column: "GtMetricsId1");
+                column: "GtMetricsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
